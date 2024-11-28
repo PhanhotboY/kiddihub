@@ -1,0 +1,24 @@
+#footer {
+  section {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 1rem;
+
+    h4 {
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+  }
+
+  ul.list {
+    > li {
+      margin-top: 6px;
+      font-size: 14px;
+
+      &:hover {
+        color: var(--main-color);
+      }
+    }
+  }
+}

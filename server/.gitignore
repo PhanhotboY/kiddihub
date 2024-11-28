@@ -1,0 +1,12 @@
+node_modules
+
+.env
+uploads
+.env*
+.flaskenv*
+!.env.project
+!.env.vault
+.env.me
+dist
+
+src/logs

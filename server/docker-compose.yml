@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  kiddimdb:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: superbstrongpassword
+    ports:
+      - 27017:27017
+    networks:
+      - kiddihub_network
+
+  # server:
+  #   build: .
+  #   ports:
+  #     - 8080:8080
+  #   depends_on:
+  #     - kiddimdb
+  #   networks:
+  #     - kiddihub_network
+  #   environment:
+  #     DEV_DB_HOST: kiddimdb
+
+networks:
+  kiddihub_network:
+    driver: bridge
