@@ -46,38 +46,40 @@ export default function PostList({
     setHasMore(true);
   }, [posts]);
 
+  if (!loadedPosts.length) {
+    return <div>No posts</div>;
+  }
+
   return (
-    !!loadedPosts.length && (
-      <section>
-        <ul id='article-list' className='grid gap-y-6 md:gap-y-4'>
-          {emphasized && (
-            <li>
-              <VerticalPost
-                post={loadedPosts[0]}
-                detailed
-                important
-                className='mb-4'
-              />
-            </li>
-          )}
-
-          {(emphasized ? loadedPosts.slice(1) : loadedPosts).map(
-            (a: any, i: number) => (
-              <li key={i}>
-                <HorizontalPost post={a} {...articleProps} />
-              </li>
-            )
-          )}
-        </ul>
-
-        {loading && (
-          <div className='w-fit m-auto mt-6'>
-            <CircularProgress color='inherit' />
-          </div>
+    <section>
+      <ul id='article-list' className='grid gap-y-6 md:gap-y-4'>
+        {emphasized && (
+          <li>
+            <VerticalPost
+              post={loadedPosts[0]}
+              detailed
+              important
+              className='mb-4'
+            />
+          </li>
         )}
 
-        {hasMore && <SeemoreButton className='mt-6' loadData={loadPosts} />}
-      </section>
-    )
+        {(emphasized ? loadedPosts.slice(1) : loadedPosts).map(
+          (a: any, i: number) => (
+            <li key={i}>
+              <HorizontalPost post={a} {...articleProps} />
+            </li>
+          )
+        )}
+      </ul>
+
+      {loading && (
+        <div className='w-fit m-auto mt-6'>
+          <CircularProgress color='inherit' />
+        </div>
+      )}
+
+      {hasMore && <SeemoreButton className='mt-6' loadData={loadPosts} />}
+    </section>
   );
 }

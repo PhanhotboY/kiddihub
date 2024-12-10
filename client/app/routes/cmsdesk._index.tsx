@@ -2,7 +2,7 @@ import { toast as notify } from 'react-toastify';
 import { useEffect, useRef, useState } from 'react';
 import { json, useFetcher, useLoaderData } from '@remix-run/react';
 
-import { getAppSettings } from '~/services/app.service';
+import { getAppSettings } from '~/services/app.server';
 import TextInput from '~/components/TextInput';
 import ImageInput from '~/components/ImageInput';
 
@@ -34,7 +34,9 @@ export default function CmsDesk() {
     appSettings.app_meta.description
   );
   const [keywords, setKeywords] = useState(appSettings.app_meta.keywords);
-  const [favicon, setFavicon] = useState(appSettings.app_favicon);
+  const [favicon, setFavicon] = useState(
+    '/favicon.ico?' + new Date().getTime()
+  );
   const [facebook, setFacebook] = useState(appSettings.app_social.facebook);
   const [instagram, setInstagram] = useState(appSettings.app_social.instagram);
   const [taxCode, setTaxCode] = useState(appSettings.app_taxCode);
@@ -128,16 +130,8 @@ export default function CmsDesk() {
             isLoading: false,
           });
           toastIdRef.current = null;
-          fetch('/cmsdesk', {
-            method: 'POST',
-            body: new URLSearchParams({
-              favicon: faviconFetcher.data?.imageUrl,
-            }),
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded',
-            },
-          });
-          setFavicon(faviconFetcher.data?.imageUrl);
+
+          setFavicon('/favicon.ico?' + new Date().getTime());
           break;
         }
 
@@ -230,19 +224,19 @@ export default function CmsDesk() {
               name='title'
               value={title}
               label='Title'
-              onChange={(t) => setTitle(t)}
+              onChange={setTitle}
             />
             <TextInput
               name='description'
               value={description}
               label='Description'
-              onChange={(d) => setDescription(d)}
+              onChange={setDescription}
             />
             <TextInput
               name='keywords'
               value={keywords}
               label='Keywords'
-              onChange={(k) => setKeywords(k)}
+              onChange={setKeywords}
             />
           </div>
 
@@ -252,20 +246,20 @@ export default function CmsDesk() {
               value={email}
               type='email'
               label='Email'
-              onChange={(e) => setEmail(e)}
+              onChange={setEmail}
             />
             <TextInput
               name='phone'
               value={phone}
               label='Phone'
               pattern='[0-9]{10}'
-              onChange={(p) => setPhone(p)}
+              onChange={setPhone}
             />
             <TextInput
               name='address'
               value={address}
               label='Address'
-              onChange={(a) => setAddress(a)}
+              onChange={setAddress}
             />
           </div>
         </div>
@@ -275,34 +269,34 @@ export default function CmsDesk() {
             name='analytics'
             value={analytics}
             label='Analytics'
-            onChange={(a) => setAnalytics(a)}
+            onChange={setAnalytics}
           />
 
           <TextInput
             name='reCaptcha'
             value={reCaptcha}
             label='reCaptcha'
-            onChange={(r) => setReCaptcha(r)}
+            onChange={setReCaptcha}
           />
 
           <TextInput
             name='facebook'
             value={facebook}
             label='Facebook'
-            onChange={(f) => setFacebook(f)}
+            onChange={setFacebook}
           />
           <TextInput
             name='instagram'
             value={instagram}
             label='Instagram'
-            onChange={(i) => setInstagram(i)}
+            onChange={setInstagram}
           />
 
           <TextInput
             name='taxCode'
             value={taxCode}
             label='MST'
-            onChange={(t) => setTaxCode(t)}
+            onChange={setTaxCode}
           />
         </div>
 

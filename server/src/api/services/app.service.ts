@@ -31,7 +31,6 @@ const getAppSettings = async () => {
         description: 'string',
         keywords: 'string',
       },
-      favicon: 'string',
       logo: 'string',
       contact: {
         email: 'string',

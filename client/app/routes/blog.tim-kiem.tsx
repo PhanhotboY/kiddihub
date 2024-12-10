@@ -1,10 +1,14 @@
-import { Suspense, useEffect, useState } from 'react';
-import { Await, Form, useLoaderData, useLocation } from '@remix-run/react';
+import { useState } from 'react';
+import { Form, useLoaderData, useLocation } from '@remix-run/react';
 import SideBar from '~/components/SideBar';
-import { getPosts } from '~/services/post.service';
-import { defer, json, LoaderFunctionArgs } from '@remix-run/node';
+import { getPosts } from '~/services/post.server';
+import { defer, LoaderFunctionArgs } from '@remix-run/node';
 import { RiSearch2Line } from '@remixicon/react';
 import PostList from '~/components/PostList';
+import Defer from '~/components/Defer';
+import { clientFetch } from '~/lib';
+import { IPost } from '~/interfaces/post.interface';
+import HandsomeError from '~/components/HandsomeError';
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
@@ -27,6 +31,10 @@ export default function SearchPage() {
   const searchParams = new URLSearchParams(location.search);
   const query = searchParams.get('q') || '';
   const [input, setInput] = useState(query);
+
+  const postsFetcher = (page: number): Promise<Array<IPost>> => {
+    return clientFetch(`/api/data?getter=getPosts&page=${page}`);
+  };
 
   return (
     <div className='container grid grid-cols-12 gap-x-6 overflow-hidden max-md:px-2 py-4'>
@@ -62,19 +70,21 @@ export default function SearchPage() {
         <PostList
           posts={searchRes.posts}
           postsGetter={async (page) => {
-            const posts = await getPosts();
+            const posts = await postsFetcher(page);
             return posts;
           }}
         />
       </div>
 
       <div className='hidden md:block col-span-3'>
-        <Suspense fallback={<div>Loading...</div>}>
-          <Await resolve={latestArticles}>
-            {(arts) => <SideBar posts={arts} />}
-          </Await>
-        </Suspense>
+        <Defer resolve={latestArticles}>
+          {(arts) => <SideBar posts={arts} />}
+        </Defer>
       </div>
     </div>
   );
+}
+
+export function ErrorBoundary() {
+  return <HandsomeError />;
 }

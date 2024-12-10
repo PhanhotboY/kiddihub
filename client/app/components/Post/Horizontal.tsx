@@ -3,6 +3,7 @@ import clsx from 'classnames';
 import { IPost } from '~/interfaces/post.interface';
 import { getPublicPeriod } from '~/lib';
 import Hydrated from '../Hydrated';
+import { RiEyeFill } from '@remixicon/react';
 
 export default function HorizontalPost({
   post,
@@ -67,13 +68,19 @@ export default function HorizontalPost({
         </h2>
 
         <div
-          className={`${
+          className={`flex items-center ${
             important ? 'text-sm italic m-1 md:m-4' : 'text-xs m-1'
           }`}
         >
           <time dateTime={post.updatedAt}>
             {getPublicPeriod(post.updatedAt)}
           </time>
+
+          <p className='mx-2 not-italic'>|</p>
+
+          <RiEyeFill size={16} className='mr-1 text-[--main-color]' />
+
+          {post.pst_views}
         </div>
 
         {detailed && (

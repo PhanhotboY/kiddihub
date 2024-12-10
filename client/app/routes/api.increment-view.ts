@@ -1,6 +1,6 @@
 import { json, LoaderFunctionArgs } from '@remix-run/node';
 import { authenticator } from '~/services/auth.server';
-import { increaseViewCount } from '~/services/post.service';
+import { increaseViewCount } from '~/services/post.server';
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   try {
@@ -20,13 +20,8 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     // // Mark the token as used to prevent further increments
     // storeToken(viewToken);
 
-    const authUser = await authenticator.isAuthenticated(request);
-    if (!authUser) {
-      return new Response(null, { status: 401, statusText: 'Unauthorized' });
-    }
-
     // Increment views in Sanity
-    await increaseViewCount(articleId, authUser);
+    await increaseViewCount(articleId);
 
     return new Response(null, { status: 204, statusText: 'No Content' });
   } catch (error: any) {

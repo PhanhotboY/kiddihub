@@ -1,11 +1,10 @@
 import { Skeleton } from '@mui/material';
-import { LinksFunction } from '@remix-run/node';
-import { json, Outlet } from '@remix-run/react';
+import { LinksFunction, LoaderFunctionArgs } from '@remix-run/node';
+import { Outlet } from '@remix-run/react';
 import { Suspense, useEffect } from 'react';
 import BlogHeader from '~/components/BlogHeader';
 import Footer from '~/components/Footer';
 import HandsomeError from '~/components/HandsomeError';
-import Hydrated from '~/components/Hydrated';
 
 export const links: LinksFunction = () => {
   return [

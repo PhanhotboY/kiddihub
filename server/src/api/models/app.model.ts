@@ -10,7 +10,6 @@ const appSchema = new Schema<IApp, IAppModel>(
       description: { type: String, required: true },
       keywords: { type: String, required: true },
     },
-    app_favicon: { type: String, required: true },
     app_logo: { type: String, required: true },
     app_contact: {
       email: { type: String, required: true },

@@ -19,7 +19,7 @@ export default function ShareBox() {
 
   const handlePrint = (e: any) => {
     e.preventDefault();
-    const printContent = document.getElementById('post_detail')
+    const printContent = document.getElementById('post-detail')
       ?.outerHTML as string;
 
     const newWindow = window.open(

@@ -36,12 +36,12 @@ export default function NavBar({
             onClick={(e) => e.stopPropagation()}
           >
             {[
-              { title: 'Phụ huynh', slug: 'parents' },
-              { title: 'Chủ trường', slug: 'school-owners' },
-              { title: 'Giáo viên', slug: 'teachers' },
-              { title: 'Kiddihub Store', slug: 'store' },
+              { title: 'Phụ huynh', slug: '#phu-huynh' },
+              { title: 'Chủ trường', slug: '#chu-truong' },
+              { title: 'Giáo viên', slug: '#giao-vien' },
+              // { title: 'Kiddihub Store', slug: 'store' },
               { title: 'Kiddihub Blog', slug: 'blog' },
-              { title: 'Đối tác', slug: 'partners' },
+              { title: 'Đối tác', slug: '#doi-tac' },
             ].map((item, index) => (
               <li
                 key={index}

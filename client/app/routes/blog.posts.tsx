@@ -1,5 +1,5 @@
 import { ActionFunctionArgs, json } from '@remix-run/node';
-import { getPosts } from '~/services/post.service';
+import { getPosts } from '~/services/post.server';
 
 export const action = async ({ request }: ActionFunctionArgs) => {
   const url = new URL(request.url);

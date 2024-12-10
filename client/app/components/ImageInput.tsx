@@ -36,10 +36,11 @@ export default function ImageInput({
       <div className='flex flex-col items-center justify-center'>
         {value ? (
           <div className='relative wrapper rounded-xl border border-blue-100 w-full flex justify-center p-2 shadow-sm shadow-blue-500 '>
-            <img src={value} alt='' className='w-40 aspect-square ' />
+            <img src={value} alt='' className='w-full h-40 object-contain' />
 
             <button
               className='absolute top-2 right-4'
+              type='button'
               onClick={() => onChange(null)}
             >
               <RiCloseLine />

@@ -1,4 +1,9 @@
-import { defer, json, LinksFunction } from '@remix-run/node';
+import {
+  defer,
+  json,
+  LinksFunction,
+  LoaderFunctionArgs,
+} from '@remix-run/node';
 
 import PostBox from '~/components/PostBox';
 import { IPost } from '~/interfaces/post.interface';
@@ -6,8 +11,8 @@ import SeemoreButton from '~/components/SeemoreButton';
 import SmallPostBox from '~/components/SmallPostBox';
 import VerticalArtical from '~/components/Post/Vertical';
 import HorizontalPost from '~/components/Post/Horizontal';
-import { getPosts } from '~/services/post.service';
-import { useLoaderData } from '@remix-run/react';
+import { getPosts } from '~/services/post.server';
+import { Link, useLoaderData } from '@remix-run/react';
 import Defer from '~/components/Defer';
 
 export const links: LinksFunction = () => {
@@ -23,7 +28,7 @@ export const links: LinksFunction = () => {
   ];
 };
 
-export const loader = async () => {
+export const loader = async ({ request }: LoaderFunctionArgs) => {
   try {
     const posts = getPosts();
 
@@ -41,16 +46,16 @@ export default function Index() {
       <div className='grid grid-cols-12 gap-y-8 md:gap-y-20'>
         <Defer resolve={posts}>{(p) => <Overview posts={p} />}</Defer>
 
-        <SmallPostBox postsGetter={() => posts} height={450} showSidebar />
+        <SmallPostBox postsGetter={() => posts} height={500} showSidebar />
 
         <PostBox postsGetter={() => posts} />
 
-        <SmallPostBox postsGetter={() => posts} height={450} showSidebar />
+        <SmallPostBox postsGetter={() => posts} height={500} showSidebar />
 
         <PostBox postsGetter={() => posts} />
 
         <div className='col-span-12'>
-          <SeemoreButton href='/tin-moi' />
+          <SeemoreButton href='/blog/tin-moi' />
         </div>
       </div>
     </div>

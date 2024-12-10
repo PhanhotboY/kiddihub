@@ -1,5 +1,5 @@
 import { json } from '@remix-run/node';
-import { getAppSettings } from '~/services/app.service';
+import { getAppSettings } from '~/services/app.server';
 
 export const loader = async () => {
   // const appSettings = await getAppSettings();

@@ -5,18 +5,20 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
   useRouteError,
 } from '@remix-run/react';
-import type { LinksFunction } from '@remix-run/node';
+import type { LinksFunction, MetaFunction } from '@remix-run/node';
 
 import toastifyCss from 'react-toastify/ReactToastify.css?url';
 import style from './styles/index.scss?url';
 import HandsomeError from './components/HandsomeError';
 import { Bounce, ToastContainer } from 'react-toastify';
-import { getAppSettings } from './services/app.service';
+import { getAppSettings } from './services/app.server';
 import { v2 as cloudinary } from 'cloudinary';
 import { getPublicId } from './utils';
 import Hydrated from './components/Hydrated';
+import BackToTop from './widgets/BackToTop';
 
 export const links: LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -33,14 +35,18 @@ export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: toastifyCss },
 ];
 
-export const meta = [
-  {
-    description: 'A Handsome Remix App',
-  },
-  {
-    title: 'A Handsome Remix App',
-  },
-];
+export const meta: MetaFunction = () => {
+  const { appSettings } = useLoaderData<typeof loader>();
+
+  return [
+    {
+      description: appSettings.app_meta.description,
+    },
+    {
+      title: appSettings.app_meta.title,
+    },
+  ];
+};
 
 export const loader = async () => {
   const appSettings = await getAppSettings();
@@ -66,6 +72,8 @@ export default function App() {
       </head>
       <body className='app'>
         <Outlet />
+
+        <Hydrated>{() => <BackToTop />}</Hydrated>
 
         <ToastContainer
           position='top-right'
@@ -95,7 +103,8 @@ export function ErrorBoundary() {
         <meta charSet='utf-8' />
         <meta name='viewport' content='width=device-width, initial-scale=1' />
 
-        <Meta />
+        <meta name='description' content='An error occurred' />
+        <title>An error occurred</title>
         <Links />
       </head>
       <body>

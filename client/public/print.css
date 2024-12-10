@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  color: var(--sub2-text-color);
+
+  @apply bg-white dark:bg-gray-950;
+
+  @media (prefers-color-scheme: light) {
+    color-scheme: light;
+  }
+
+  --main-color: #c31e40;
+  --sub1-color: #fff;
+
+  --main-bg-color: #fff;
+  --sub1-bg-color: #f5f5f5;
+
+  --main-text-color: #fff;
+  --sub1-text-color: #f7ce1a;
+  --sub2-text-color: #242424;
+  --sub3-text-color: #363636;
+  --sub4-text-color: #4e4e4e;
+  --sub5-text-color: #515151;
+  --sub6-text-color: #666;
+  --sub7-text-color: #959595;
+}
+
+.container {
+  margin: auto;
+}
+
+@media only screen and (min-width: 1320px) {
+  .container {
+    max-width: 1200px;
+  }
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin-inline: 1cm;
+    margin-block: 2cm;
+  }
+}
+
+article {
+  display: flex;
+  color: var(--sub4-text-color);
+
+  .thumb-wrapper {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  h2 {
+    font-weight: 700;
+    color: var(--sub4-text-color);
+  }
+
+  time {
+    margin-block: 10px;
+    color: var(--sub7-text-color);
+    display: block;
+  }
+
+  p {
+    color: var(--sub4-text-color);
+  }
+}
+
+.scroll {
+  &::-webkit-scrollbar {
+    width: 6px; /* width of the entire scrollbar */
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.1);
+    opacity: 0.1;
+    border-radius: 20px; /* roundness of the scroll thumb */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2); /* color of the scroll thumb */
+    border-radius: 20px; /* roundness of the scroll thumb */
+    opacity: 0.1;
+  }
+}
+
+#article_detail {
+  * {
+    margin-block: 1rem;
+    font-size: 18px;
+  }
+
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: 20px;
+    margin-block: 1.125rem;
+    font-weight: 600;
+    color: var(--sub2-text-color);
+  }
+
+  h2 {
+    color: var(--sub4-text-color);
+  }
+
+  h4 {
+    font-size: 18px;
+    font-style: italic;
+  }
+
+  h5 {
+    font-size: 17px;
+    color: var(--sub4-text-color);
+  }
+
+  h6 {
+    font-size: 16px;
+    font-style: italic;
+    color: var(--sub4-text-color);
+  }
+}

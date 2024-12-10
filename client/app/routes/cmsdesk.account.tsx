@@ -3,7 +3,7 @@ import UserProfileDetails from '~/widgets/UserProfileDetails';
 import UserProfileInfo from '~/widgets/UserProfileInfo';
 import { ActionFunctionArgs, json, LoaderFunctionArgs } from '@remix-run/node';
 import { authenticator } from '~/services/auth.server';
-import { getCurrentUser, updateUser } from '~/services/user.service';
+import { getCurrentUser, updateUser } from '~/services/user.server';
 import { useLoaderData } from '@remix-run/react';
 
 export const action = async ({ request }: ActionFunctionArgs) => {

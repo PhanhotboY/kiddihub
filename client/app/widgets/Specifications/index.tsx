@@ -2,8 +2,8 @@ import { RiGroupLine } from '@remixicon/react';
 
 export default function Specifications() {
   return (
-    <section className='container flex flex-col md:flex-row gap-8 md:gap-0 scale-125 md:scale-100 flex-wrap items-center justify-evenly text-[--sub1-text-color]'>
-      <div className='flex items-center w-fit'>
+    <section className='container grid grid-cols-12 gap-8 scale-125 md:scale-100 flex-wrap items-center justify-evenly text-[--sub1-text-color]'>
+      <div className='flex justify-center w-full items-center w-fit col-span-12 md:col-span-6 lg:col-span-4'>
         <RiGroupLine />
 
         <div className='pl-4 ml-4 border-l-4 border-[color:--main-color]'>
@@ -15,7 +15,7 @@ export default function Specifications() {
         </div>
       </div>
 
-      <div className='flex items-center w-fit'>
+      <div className='flex justify-center w-full items-center w-fit col-span-12 md:col-span-6 lg:col-span-4'>
         <RiGroupLine />
 
         <div className='pl-4 ml-4 border-l-4 border-[color:--main-color]'>
@@ -27,7 +27,7 @@ export default function Specifications() {
         </div>
       </div>
 
-      <div className='flex items-center w-fit'>
+      <div className='flex justify-center w-full items-center w-fit col-span-12 md:col-span-6 md:col-start-4 lg:col-span-4'>
         <RiGroupLine />
 
         <div className='pl-4 ml-4 border-l-4 border-[color:--main-color]'>

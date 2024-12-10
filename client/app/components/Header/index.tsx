@@ -3,18 +3,22 @@ import { RiCloseLine, RiMenuLine } from '@remixicon/react';
 import { useState } from 'react';
 import { useRootLoaderData } from '~/lib/useRootLoaderData';
 
-export default function Header() {
+export default function Header({ shadow }: { shadow?: boolean }) {
   const { appSettings } = useRootLoaderData();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className='shadow-lg fixed top-0 w-full bg-white h-16 flex z-40'>
+    <header
+      className={`${
+        shadow ? 'shadow-lg' : ''
+      } fixed top-0 w-full bg-white flex z-40`}
+    >
       <div className='container flex items-center justify-between'>
         <div className='logo'>
-          <Link className='py-4' to='/'>
+          <Link className='px-2 py-4' to='/'>
             <img
-              className='w-fit'
+              className='h-10 object-contain'
               src={appSettings.app_logo}
               alt={appSettings.app_meta.title}
             />
@@ -38,12 +42,12 @@ export default function Header() {
               onClick={(e) => e.stopPropagation()}
             >
               {[
-                { title: 'Phụ huynh', slug: 'parents' },
-                { title: 'Chủ trường', slug: 'school-owners' },
-                { title: 'Giáo viên', slug: 'teachers' },
-                { title: 'Kiddihub Store', slug: 'store' },
+                { title: 'Phụ huynh', slug: '#phu-huynh' },
+                { title: 'Chủ trường', slug: '#chu-truong' },
+                { title: 'Giáo viên', slug: '#giao-vien' },
+                // { title: 'Kiddihub Store', slug: 'store' },
                 { title: 'Kiddihub Blog', slug: 'blog' },
-                { title: 'Đối tác', slug: 'partners' },
+                { title: 'Đối tác', slug: '#doi-tac' },
               ].map((item, index) => (
                 <li
                   key={index}
@@ -66,12 +70,12 @@ export default function Header() {
             Đăng trường
           </Link>
 
-          <Link
+          {/* <Link
             to='/login'
             className='inline-flex items-center gap-2 rounded border border-[--main-color] px-4 py-2 text-sm transition-all hover:shadow-lg disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none hidden sm:inline-block'
           >
             Đăng nhập
-          </Link>
+          </Link> */}
 
           <button
             className='lg:hidden'

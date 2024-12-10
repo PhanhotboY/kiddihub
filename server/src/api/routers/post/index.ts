@@ -7,11 +7,11 @@ const router = Router();
 
 router.get('/', PostController.getPosts);
 router.get('/:id', PostController.getPost);
+router.post('/:id/views', PostController.increasePostViews);
 
 router.use(authenticationV2);
 
 router.put('/:id', PostController.updatePost);
-router.post('/:id/views', PostController.increasePostViews);
 router.post('/', PostController.createPost);
 router.delete('/:id', PostController.deletePost);
 

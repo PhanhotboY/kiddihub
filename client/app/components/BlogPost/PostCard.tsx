@@ -51,7 +51,13 @@ export default function PostCard({
         </Link>
 
         <span className='capitalize text-zinc-500 dark:text-light/50 text-sm'>
-          {format(new Date(post.updatedAt), 'MMMM dd, yyyy')}
+          {(() => {
+            try {
+              return format(new Date(post.updatedAt), 'MMMM dd, yyyy');
+            } catch (error) {
+              return post.updatedAt;
+            }
+          })()}
         </span>
       </div>
     </div>

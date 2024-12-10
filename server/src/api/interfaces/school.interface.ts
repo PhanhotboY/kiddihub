@@ -5,15 +5,19 @@ import { SCHOOL } from '../constants/school.constant';
 interface IRawSchool {
   _id: string;
   sch_name: string;
+  sch_slug: string;
+  sch_avatar: string;
+  sch_model: Values<typeof SCHOOL.MODEL>;
+  sch_type: Values<typeof SCHOOL.TYPE>;
+  sch_program: Values<typeof SCHOOL.PROGRAM>;
   sch_address: {
     province: string;
     district: string;
-    ward: string;
     street: string;
   };
-  sch_acceptedAge: {
-    from: number;
-    to: number;
+  sch_age: {
+    from: string;
+    to: string;
   };
   sch_tuition: {
     from: number;
@@ -43,15 +47,19 @@ export type ISchool = HydratedDocument<IRawSchool>;
 
 export interface ISchoolAttrs {
   name: string;
+  slug: string;
+  avatar: string;
+  model: ISchool['sch_model'];
+  type: ISchool['sch_type'];
+  program: ISchool['sch_program'];
   address: {
-    city: string;
     district: string;
     province: string;
     street: string;
   };
-  acceptedAge: {
-    from: number;
-    to: number;
+  age: {
+    from: string;
+    to: string;
   };
   tuition: {
     from: number;
@@ -83,9 +91,9 @@ export interface ISchoolResponseData {
     province: string;
     street: string;
   };
-  acceptedAge: {
-    from: number;
-    to: number;
+  age: {
+    from: string;
+    to: string;
   };
   tuition: {
     from: number;

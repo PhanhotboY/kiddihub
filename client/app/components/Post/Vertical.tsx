@@ -1,6 +1,7 @@
 import { Link } from '@remix-run/react';
 import { getPublicPeriod } from '~/lib';
 import { IPost } from '~/interfaces/post.interface';
+import { RiEyeFill } from '@remixicon/react';
 
 export default function VerticalArtical({
   post,
@@ -14,7 +15,9 @@ export default function VerticalArtical({
   className?: string;
 }) {
   return (
-    <article className={`${className} col-span-3 flex-col`}>
+    <article
+      className={`${className} col-span-3 flex-col text-[--sub1-text-color]`}
+    >
       <figure className='hover:text-[--main-color]'>
         <Link to={`/blog/doc/${post.pst_slug}`} className='thumb-wrapper'>
           <img
@@ -46,10 +49,13 @@ export default function VerticalArtical({
 
       {detailed && (
         <div className='max-md:px-2'>
-          <div className='m-1 md:m-4'>
+          <div className='m-1 md:m-4 flex items-center'>
             <time className='text-xs' dateTime={post.createdAt}>
               {getPublicPeriod(post.createdAt)}
             </time>
+            <p className='mx-2'>|</p>{' '}
+            <RiEyeFill size={16} className='mr-1 text-[--main-color]' />
+            {post.pst_views}
           </div>
 
           <p

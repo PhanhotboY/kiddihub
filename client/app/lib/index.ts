@@ -56,4 +56,15 @@ const getPageOffset = ({ page, limit }: { page: number; limit: number }) => {
   };
 };
 
-export { getPublicPeriod, getNumerator, getDemonator, getPageOffset };
+const clientFetch = async (url: string, init?: RequestInit) => {
+  const res = await fetch(url, init);
+  return res.json();
+};
+
+export {
+  getPublicPeriod,
+  getNumerator,
+  getDemonator,
+  getPageOffset,
+  clientFetch,
+};

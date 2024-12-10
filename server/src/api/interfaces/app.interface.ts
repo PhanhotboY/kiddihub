@@ -6,7 +6,6 @@ export interface IRawApp {
     description: string;
     keywords: string;
   };
-  app_favicon: string;
   app_logo: string;
   app_contact: {
     email: string;
@@ -34,7 +33,6 @@ export interface IAppAttrs {
     description: string;
     keywords: string;
   };
-  favicon: string;
   logo: string;
   contact: {
     email: string;

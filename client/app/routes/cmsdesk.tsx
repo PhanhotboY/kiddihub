@@ -3,7 +3,7 @@ import { Link, NavLink, Outlet, useLocation } from '@remix-run/react';
 
 import 'react-toastify/ReactToastify.css';
 import HandsomeError from '~/components/HandsomeError';
-import { updateAppSettings } from '~/services/app.service';
+import { updateAppSettings } from '~/services/app.server';
 import { authenticator } from '~/services/auth.server';
 
 export const action = async ({ request }: ActionFunctionArgs) => {
@@ -27,7 +27,6 @@ export const action = async ({ request }: ActionFunctionArgs) => {
           facebook: body.get('facebook'),
           instagram: body.get('instagram'),
         },
-        favicon: body.get('favicon'),
         logo: body.get('logo'),
         google: {
           analytics: body.get('analytics'),

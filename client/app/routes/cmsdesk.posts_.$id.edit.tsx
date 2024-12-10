@@ -18,9 +18,9 @@ import { toast as notify } from 'react-toastify';
 
 import Hydrated from '~/components/Hydrated';
 import QuillEditor from '~/components/QuillEditor/index.client';
+import { uploadImage } from '~/lib/uploadHandler.server';
 import { authenticator } from '~/services/auth.server';
-import { uploadImage } from '~/services/cloudinary.service';
-import { deletePost, getPostDetail, updatePost } from '~/services/post.service';
+import { deletePost, getPostDetail, updatePost } from '~/services/post.server';
 
 export const action = async ({ request, params }: ActionFunctionArgs) => {
   const id = params.id;
@@ -33,7 +33,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 
   const user = await authenticator.isAuthenticated(request);
   switch (request.method) {
-    case 'POST':
+    case 'PUT':
       try {
         const r = request.clone();
         let formData = await r.formData();
@@ -42,10 +42,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
         let thumbnail;
 
         if (file.size > 0) {
-          formData = await unstable_parseMultipartFormData(
-            request,
-            uploadHandler({ folder })
-          );
+          formData = await uploadImage(request, folder);
           thumbnail = formData.get('thumbnail') as string;
         }
         const title = formData.get('title') as string;
@@ -103,7 +100,7 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
 export default function EditPost() {
   const navigate = useNavigate();
   const { post } = useLoaderData<typeof loader>();
-
+  console.log(post);
   const [isChanged, setIsChanged] = useState(false);
   const [content, setContent] = useState(post.pst_content || '');
   const [title, setTitle] = useState(post.pst_title || '');
@@ -155,12 +152,12 @@ export default function EditPost() {
         post.pst_title !== title ||
         post.pst_thumbnail !== thumbnail
     );
-  }, [content, title, thumbnail]);
+  }, [post, content, title, thumbnail]);
 
   return (
     <fetcher.Form
       className='container flex flex-col gap-y-4'
-      method='POST'
+      method='PUT'
       encType='multipart/form-data'
     >
       <div>
@@ -307,18 +304,3 @@ export default function EditPost() {
     </fetcher.Form>
   );
 }
-
-const uploadHandler = ({ id, folder }: { id?: string; folder?: string }) =>
-  unstable_composeUploadHandlers(
-    // our custom upload handler
-    async ({ name, contentType, data, filename }) => {
-      if (name !== 'thumbnail') {
-        return undefined;
-      }
-      const uploadedImage = await uploadImage(data, { id, folder });
-
-      return uploadedImage.secure_url;
-    },
-    // fallback to memory for everything else
-    unstable_createMemoryUploadHandler()
-  );

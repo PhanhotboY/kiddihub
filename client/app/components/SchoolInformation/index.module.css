@@ -1,0 +1,38 @@
+.wrapper {
+  section {
+    border-radius: 0.75rem; /* 12px */
+    box-shadow: 0 0 1.25rem 0 rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+    padding: 1rem;
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .content > * {
+      margin-block: 1rem;
+    }
+
+    .overview {
+      color: var(--sub1-text-color);
+
+      .key {
+        margin-top: 12px;
+        font-size: 0.875rem;
+      }
+
+      .value {
+        font-size: 1.15rem;
+        line-height: 2.5rem;
+        font-weight: 600;
+      }
+
+      @media (min-width: 768px) {
+        .value {
+          font-size: 1.25rem;
+        }
+      }
+    }
+  }
+}

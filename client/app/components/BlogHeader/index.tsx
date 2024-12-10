@@ -5,7 +5,13 @@ import {
   RiListCheck,
 } from '@remixicon/react';
 import { ReactNode, useEffect, useState } from 'react';
-import { Link, useFetcher, useLoaderData, useLocation } from '@remix-run/react';
+import {
+  Form,
+  Link,
+  useFetcher,
+  useLoaderData,
+  useLocation,
+} from '@remix-run/react';
 
 import style from './index.module.css';
 import { loader } from '~/root';
@@ -65,7 +71,7 @@ export default function BlogHeader({}: // theme,
             </Link>
           </div>
 
-          <form
+          <Form
             className='relative hidden md:block'
             method='GET'
             action='/blog/tim-kiem'
@@ -84,7 +90,7 @@ export default function BlogHeader({}: // theme,
             >
               <RiSearch2Line className={`text-[--main-color]`} />
             </button>
-          </form>
+          </Form>
 
           <button
             className='md:hidden'
@@ -96,7 +102,7 @@ export default function BlogHeader({}: // theme,
         </section>
 
         <section className='md:hidden px-3'>
-          <form
+          <Form
             className={`relative overflow-hidden transition-all duration-500`}
             style={{ height: showSearch ? 42 : 0 }}
             method='GET'
@@ -117,7 +123,7 @@ export default function BlogHeader({}: // theme,
             >
               <RiSearch2Line className={`text-[--main-color]`} />
             </button>
-          </form>
+          </Form>
         </section>
       </header>
 

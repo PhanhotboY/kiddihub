@@ -1,4 +1,4 @@
-#post_detail {
+#post-detail {
   * {
     margin-block: 1rem;
     font-size: 18px;
@@ -38,5 +38,13 @@
   img {
     max-height: 400px;
     object-fit: contain;
+  }
+}
+
+#post-body {
+  margin-block: 1rem;
+
+  & > * {
+    margin-block: 1rem;
   }
 }

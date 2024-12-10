@@ -3,7 +3,7 @@ import { defer, LoaderFunctionArgs, MetaFunction } from '@remix-run/node';
 import { Await, Link, useFetcher, useLoaderData } from '@remix-run/react';
 
 import HandsomeError from '~/components/HandsomeError';
-import { getPosts, getPostDetail } from '~/services/post.service';
+import { getPosts, getPostDetail } from '~/services/post.server';
 import PostDetail from '~/components/PostDetail';
 import Hydrated from '~/components/Hydrated';
 import SameCategoryArticles from '~/widgets/SameCategoryArticles';
@@ -76,6 +76,7 @@ export default function Article() {
 
     // Only increment views if the 30-second timer has reached
     if (timerReached) {
+      console.log('time reached, incrementing view');
       // Trigger the view increment API
       fetcher.load(`/api/increment-view?articleId=${articleId}`);
 
