@@ -6,7 +6,7 @@ import { formatAttributeName } from '../utils';
 const SchoolSchema = new Schema<ISchool, ISchoolModel>(
   {
     sch_name: { type: String, default: 'Unknown', unique: true },
-    sch_slug: { type: String, default: 'unknown' },
+    sch_slug: { type: String, default: 'unknown', unique: true },
     sch_avatar: { type: String, default: '' },
     sch_model: { type: String, default: SCHOOL.MODEL.MAM_NON },
     sch_type: { type: String, default: SCHOOL.TYPE.TU_THUC },

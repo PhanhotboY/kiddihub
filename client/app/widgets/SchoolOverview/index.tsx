@@ -5,7 +5,7 @@ import { Link } from '@remix-run/react';
 import { useRootLoaderData } from '~/lib/useRootLoaderData';
 import Header from '~/components/Header';
 import { ISchoolDetail } from '~/interfaces/school.interface';
-import { toAddressString } from '~/utils';
+import { toAddressString } from '~/utils/address.util';
 
 export default function SchoolOverview({
   images,

@@ -4,12 +4,12 @@ import { RefObject, useRef } from 'react';
 import Slider from 'react-slick';
 import { getPublicPeriod } from '~/lib';
 import Hydrated from '../Hydrated';
-import { IPost } from '~/interfaces/post.interface';
+import { IPage } from '~/interfaces/page.interface';
 
 // @ts-ignore
 const SliderComponent = !!Slider.default ? Slider.default : Slider;
 
-export default function FeaturedNews({ posts }: { posts: IPost[] }) {
+export default function FeaturedNews({ pages }: { pages: IPage[] }) {
   let sliderRef = useRef<Slider>(null);
   const next = () => {
     // @ts-ignore
@@ -73,24 +73,24 @@ export default function FeaturedNews({ posts }: { posts: IPost[] }) {
                 }}
                 {...settings}
               >
-                {posts.map((post, i) => (
+                {pages.map((page, i) => (
                   <article className='px-3 flex-col' draggable={false} key={i}>
                     <div className='bg-white'>
                       <figure className='hover:text-[--main-color]'>
                         <Link
-                          to={`/doc/${post.pst_slug}`}
+                          to={`/doc/${page.pst_slug}`}
                           className='thumb-wrapper'
                         >
                           <img
-                            src={post.pst_thumbnail}
-                            alt={post.pst_title}
-                            title={post.pst_title}
+                            src={page.pst_thumbnail}
+                            alt={page.pst_title}
+                            title={page.pst_title}
                           />
                         </Link>
 
                         <h2
                           className={`text-base text-inherit mt-2 font-semibold px-2`}
-                          title={post.pst_title}
+                          title={page.pst_title}
                           style={{
                             display: '-webkit-box',
                             textOverflow: 'ellipsis',
@@ -101,16 +101,16 @@ export default function FeaturedNews({ posts }: { posts: IPost[] }) {
                             minHeight: '48px',
                           }}
                         >
-                          <Link to={`/doc/${post.pst_slug}`}>
-                            {post.pst_title}
+                          <Link to={`/doc/${page.pst_slug}`}>
+                            {page.pst_title}
                           </Link>
                         </h2>
                       </figure>
 
                       <div className='content flex flex-col px-2'>
                         <div>
-                          <time className='text-xs' dateTime={post.createdAt}>
-                            {getPublicPeriod(post.createdAt)}
+                          <time className='text-xs' dateTime={page.createdAt}>
+                            {getPublicPeriod(page.createdAt)}
                           </time>
                         </div>
                       </div>

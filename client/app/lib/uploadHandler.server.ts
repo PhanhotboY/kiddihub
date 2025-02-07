@@ -3,7 +3,6 @@ import {
   unstable_createMemoryUploadHandler,
   unstable_parseMultipartFormData,
 } from '@remix-run/node';
-import { uploadImage2Cld } from '~/services/cloudinary.server';
 
 const uploadHandler = ({ id, folder }: { id?: string; folder?: string }) =>
   unstable_composeUploadHandlers(
@@ -12,7 +11,7 @@ const uploadHandler = ({ id, folder }: { id?: string; folder?: string }) =>
       if (!['thumbnail', 'avatar'].includes(name)) {
         return undefined;
       }
-      const uploadedImage = await uploadImage2Cld(data, { id, folder });
+      const uploadedImage = {} as any;
 
       return uploadedImage.secure_url;
     },

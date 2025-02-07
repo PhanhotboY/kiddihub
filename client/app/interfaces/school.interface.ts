@@ -43,3 +43,40 @@ export interface ISchoolDetail extends ISchool {
   updatedAt: string;
   createdAt: string;
 }
+
+export interface ISchoolCreate {
+  avatar: string;
+  name: string;
+  type: string;
+  model: string;
+  address: {
+    province: string;
+    district: string;
+    street: string;
+  };
+  age: {
+    from: string;
+    to: string;
+  };
+  tuition: {
+    from: string;
+    to: string;
+  };
+  program: string;
+  information: {
+    introduction?: string;
+    infrastructure?: string;
+    service?: string;
+    curriculum?: string;
+    workforce?: string;
+    policy?: string;
+  };
+  contact: {
+    email: string;
+    msisdn: string;
+    facebook?: string;
+    instagram?: string;
+    website?: string;
+    map: string;
+  };
+}

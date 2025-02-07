@@ -1,44 +1,45 @@
-import { ISchool, ISchoolDetail } from '~/interfaces/school.interface';
+import { ISchool, ISchoolCreate } from '~/interfaces/school.interface';
 import { fetcher } from '.';
 import { ISessionUser } from '~/interfaces/auth.interface';
 
-const getSchools = async (request?: ISessionUser) => {
-  // const response = await fetcher('/data/schools');
-  const schools = await fetcher('/schools', { request });
-
-  return schools as Array<ISchool>;
+const getSchoolDetail = async (schoolSlug: string) => {
+  const school = await fetcher('/schools/' + schoolSlug);
+  return school;
 };
 
-const getSchoolDetail = async (id: string) => {
-  const school = await fetcher(`/schools/${id}`);
-  return school as ISchoolDetail;
+const getSchools = async () => {
+  const schools = await fetcher('/schools');
+  return schools as ISchool[];
 };
 
-const createSchool = async (school: any, request: ISessionUser) => {
-  const scl = await fetcher('/schools', {
+const createSchool = async (school: ISchoolCreate, request: ISessionUser) => {
+  const newSchool = await fetcher('/schools', {
     method: 'POST',
     body: JSON.stringify(school),
     request,
   });
-
-  return scl as ISchoolDetail;
+  return newSchool;
 };
 
-const updateSchool = async (id: string, data: any, request: ISessionUser) => {
-  const school = await fetcher(`/schools/${id}`, {
+const updateSchool = async (
+  schoolSlug: string,
+  school: ISchoolCreate,
+  request: ISessionUser
+) => {
+  const updatedSchool = await fetcher('/schools/' + schoolSlug, {
     method: 'PUT',
-    body: JSON.stringify(data),
+    body: JSON.stringify(school),
     request,
   });
-  return school as ISchoolDetail;
+  return updatedSchool;
 };
 
-const deleteSchool = async (id: string, request: ISessionUser) => {
-  const school = await fetcher(`/schools/${id}`, {
+const deleteSchool = async (schoolSlug: string, request: ISessionUser) => {
+  const deletedSchool = await fetcher('/schools/' + schoolSlug, {
     method: 'DELETE',
     request,
   });
-  return school;
+  return deletedSchool;
 };
 
 export {

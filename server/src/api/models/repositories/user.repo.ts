@@ -1,3 +1,4 @@
+import { isValidObjectId } from 'mongoose';
 import { IUserAttrs } from '../../interfaces/user.interface';
 import { UserModel } from '../user.model';
 
@@ -13,4 +14,14 @@ const findUserByEmail = async (email: string) => {
   return await UserModel.findOne({ usr_email: email });
 };
 
-export { getAllUsers, createUser, findUserByEmail };
+const findUserById = async (id: string) => {
+  if (isValidObjectId(id)) {
+    return await UserModel.findById(id);
+  }
+
+  return await UserModel.findOne({
+    $or: [{ usr_email: id }, { usr_username: id }],
+  });
+};
+
+export { getAllUsers, createUser, findUserByEmail, findUserById };

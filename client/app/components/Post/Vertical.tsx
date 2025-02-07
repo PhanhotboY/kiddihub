@@ -1,15 +1,15 @@
 import { Link } from '@remix-run/react';
 import { getPublicPeriod } from '~/lib';
-import { IPost } from '~/interfaces/post.interface';
+import { IPage } from '~/interfaces/page.interface';
 import { RiEyeFill } from '@remixicon/react';
 
 export default function VerticalArtical({
-  post,
+  page,
   detailed = false,
   important = false,
   className = '',
 }: {
-  post: IPost;
+  page: IPage;
   detailed?: boolean;
   important?: boolean;
   className?: string;
@@ -19,11 +19,11 @@ export default function VerticalArtical({
       className={`${className} col-span-3 flex-col text-[--sub1-text-color]`}
     >
       <figure className='hover:text-[--main-color]'>
-        <Link to={`/blog/doc/${post.pst_slug}`} className='thumb-wrapper'>
+        <Link to={`/blog/doc/${page.pst_slug}`} className='thumb-wrapper'>
           <img
-            src={post.pst_thumbnail}
-            alt={post.pst_title}
-            title={post.pst_title}
+            src={page.pst_thumbnail}
+            alt={page.pst_title}
+            title={page.pst_title}
           />
         </Link>
 
@@ -32,7 +32,7 @@ export default function VerticalArtical({
             className={`${
               important ? 'text-2xl' : 'text-base'
             } text-inherit mt-2 max-md:px-2`}
-            title={post.pst_title}
+            title={page.pst_title}
             style={{
               display: '-webkit-box',
               textOverflow: 'ellipsis',
@@ -42,7 +42,7 @@ export default function VerticalArtical({
               overflow: 'hidden',
             }}
           >
-            <Link to={`/blog/doc/${post.pst_slug}`}>{post.pst_title}</Link>
+            <Link to={`/blog/doc/${page.pst_slug}`}>{page.pst_title}</Link>
           </h2>
         </div>
       </figure>
@@ -50,16 +50,16 @@ export default function VerticalArtical({
       {detailed && (
         <div className='max-md:px-2'>
           <div className='m-1 md:m-4 flex items-center'>
-            <time className='text-xs' dateTime={post.createdAt}>
-              {getPublicPeriod(post.createdAt)}
+            <time className='text-xs' dateTime={page.createdAt}>
+              {getPublicPeriod(page.createdAt)}
             </time>
             <p className='mx-2'>|</p>{' '}
             <RiEyeFill size={16} className='mr-1 text-[--main-color]' />
-            {post.pst_views}
+            {page.pst_views}
           </div>
 
           <p
-            dangerouslySetInnerHTML={{ __html: post.pst_excerpt }}
+            dangerouslySetInnerHTML={{ __html: page.pst_excerpt }}
             style={{
               display: '-webkit-box',
               textOverflow: 'ellipsis',

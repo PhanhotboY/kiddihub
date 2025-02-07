@@ -1,45 +1,33 @@
 export interface IAppSettings {
-  app_meta: {
-    title: string;
-    description: string;
-    keywords: string;
-  };
-  app_logo?: string;
-  app_contact: {
-    email: string;
-    phone: string;
-    address: string;
-  };
+  app_title: string;
+  app_description: string;
+  app_logo: string;
+  app_favicon: string;
   app_social: {
     facebook: string;
-    instagram: string;
-  };
-  app_google: {
-    analytics: string;
-    reCaptcha: string;
+    youtube: string;
+    tiktok: string;
+    zalo: string;
   };
   app_taxCode: string;
+  app_headScripts?: string;
+  app_bodyScripts?: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface IAppSettingsAttrs {
-  meta: {
-    title: string;
-    description: string;
-    keywords: string;
-  };
-  logo?: string;
-  contact: {
-    email: string;
-    phone: string;
-    address: string;
-  };
+  title: string;
+  description: string;
+  logo: string;
+  favicon: string;
   social: {
-    facebook: string;
-    instagram: string;
-  };
-  google: {
-    analytics: string;
-    reCaptcha: string;
+    facebook?: string;
+    youtube?: string;
+    tiktok?: string;
+    zalo?: string;
   };
   taxCode: string;
+  headScripts?: string;
+  bodyScripts?: string;
 }

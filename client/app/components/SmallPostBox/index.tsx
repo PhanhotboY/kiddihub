@@ -1,4 +1,4 @@
-import { IPost } from '~/interfaces/post.interface';
+import { IPage } from '~/interfaces/page.interface';
 import HorizontalPost from '../Post/Horizontal';
 import VerticalArtical from '../Post/Vertical';
 // import BoxHeader from '../BoxHeading';
@@ -16,7 +16,7 @@ export default function SmallPostBox({
   ads,
 }: {
   // category: ICategoryDetail | string;
-  postsGetter: () => Promise<IPost[]>;
+  postsGetter: () => Promise<IPage[]>;
   showSidebar?: boolean;
   detailed?: boolean;
   ratio?: string;
@@ -24,7 +24,7 @@ export default function SmallPostBox({
   height?: number;
   ads?: Array<any>;
 }) {
-  const [posts, setPosts] = useState<IPost[]>([]);
+  const [posts, setPosts] = useState<IPage[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -50,7 +50,7 @@ export default function SmallPostBox({
                     ratio.split('/')[0]
                   } h-fit`}
                 >
-                  <VerticalArtical post={posts[0]} detailed important />
+                  <VerticalArtical page={posts[0]} detailed important />
                 </div>
 
                 <div
@@ -72,7 +72,7 @@ export default function SmallPostBox({
                         key={index}
                       >
                         <HorizontalPost
-                          post={post}
+                          page={post}
                           ratio='1/2'
                           colSpan={3}
                           detailed={detailed}

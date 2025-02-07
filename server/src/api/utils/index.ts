@@ -1,6 +1,8 @@
 import { randomBytes } from 'crypto';
+import { Request } from 'express';
 import _ from 'lodash';
 import slugify from 'slugify';
+import { serverConfig } from '@configs/config.server';
 
 declare global {
   interface Object {
@@ -153,11 +155,19 @@ function replaceTemplatePlaceholders(
   );
 }
 
+function getImageUrl(req: Request, attribute: string): string {
+  const path = (req.files as any)?.[attribute]?.[0].path;
+  if (!path) return req.body[attribute];
+
+  return serverConfig.serverUrl + path.replace('public', '');
+}
+
 export {
   getSlug,
   isNullish,
   flattenObj,
   isEmptyObj,
+  getImageUrl,
   getReturnData,
   getReturnList,
   getSkipNumber,

@@ -11,6 +11,9 @@
 @tailwind peer;
 
 .container {
+  display: grid;
+  gap: 32px;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
   margin-inline: auto;
 }
 

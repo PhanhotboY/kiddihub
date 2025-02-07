@@ -1,11 +1,11 @@
-import { IPostDetail } from '~/interfaces/post.interface';
+import { IPageDetail } from '~/interfaces/page.interface';
 import { getPublicPeriod } from '~/lib';
 import { useRootLoaderData } from '~/lib/useRootLoaderData';
 import { RiEyeFill } from '@remixicon/react';
 
 import './index.css';
 
-export default function PostDetail({ post }: { post: IPostDetail }) {
+export default function PostDetail({ post }: { post: IPageDetail }) {
   const { appSettings } = useRootLoaderData();
 
   return (

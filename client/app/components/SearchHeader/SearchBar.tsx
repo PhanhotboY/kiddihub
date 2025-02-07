@@ -1,6 +1,6 @@
 import { useLoaderData } from '@remix-run/react';
 import SearchBox from '../SearchBox';
-import { loader } from '~/routes/_main.$schoolModel';
+import { loader } from '~/routes/_main+/$schoolModel';
 
 export default function SearchBar() {
   const { schoolModel } = useLoaderData<typeof loader>();

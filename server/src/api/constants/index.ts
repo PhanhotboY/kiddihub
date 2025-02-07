@@ -6,7 +6,10 @@ export * from './otp.constant';
 export * from './resource.constant';
 export * from './school.constant';
 export * from './review.constant';
-export * from './post.constant';
+export * from './page.constant';
+export * from './branch.constant';
+export * from './image.constant';
+export * from './category.constant';
 
 export const KEYTOKEN = {
   COLLECTION_NAME: 'KeyTokens',

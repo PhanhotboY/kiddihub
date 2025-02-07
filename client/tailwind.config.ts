@@ -91,5 +91,6 @@ export default {
     'col-span-10',
     'col-span-9',
   ],
+  important: true,
   plugins: [],
 } satisfies Config;

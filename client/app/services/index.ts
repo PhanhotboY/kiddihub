@@ -1,8 +1,8 @@
 const API_URL = process.env.API_URL || 'http://localhost:3000';
 
 const headers = {
-  'Content-Type': 'application/json',
   'x-api-key': process.env.API_APIKEY || '',
+  credentials: 'include',
 };
 
 const fetcher = async (
@@ -25,14 +25,35 @@ const fetcher = async (
     ...options,
     headers: {
       ...headers,
+      ...(options?.body instanceof FormData
+        ? {}
+        : { 'Content-Type': 'application/json' }),
       ...options?.headers,
       'x-client-id': options?.request?.user?.id || '',
       Authorization: options?.request?.tokens?.accessToken || '',
+      'x-refresh-token': options?.request?.tokens?.refreshToken || '',
     },
   });
+
   const data = await response.json();
+
+  if (response.ok) {
+    console.log(
+      '%s %s \x1b[32m%s\x1b[0m',
+      options?.method || 'GET',
+      path,
+      response.status
+    );
+  } else {
+    console.log(
+      '%s %s \x1b[31m%s\x1b[0m',
+      options?.method || 'GET',
+      path,
+      response.status
+    );
+  }
+
   if (data.errors) {
-    console.log(options?.method || 'GET', path, data.errors);
     throw new Response(null, {
       status: data.errors.status,
       statusText: data.errors.message,

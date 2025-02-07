@@ -3,6 +3,7 @@ import { getTemplate } from './template.service';
 import { TEMPLATE } from '../constants';
 import { replaceTemplatePlaceholders } from '@utils/index';
 import { newOTP } from './otp.service';
+import { serverConfig } from '@configs/config.server';
 
 const sendMail = async ({
   to,
@@ -33,17 +34,37 @@ const sendVerificationEmail = async (toEmail: string) => {
     throw new Error('Email verification template not found');
   }
 
-  const serverUrl = process.env.SERVER_URL || 'http://localhost:8080';
-
-  const html = replaceTemplatePlaceholders(template.tem_html, {
-    verifyUrl: `${serverUrl}/api/v1/auth/verify-email?token=${otp.otp_token}`,
+  const html = replaceTemplatePlaceholders(template.tem_html!, {
+    verifyUrl: `${serverConfig.serverUrl}/api/v1/auth/verify-email?token=${otp.otp_token}`,
   });
 
   return await sendMail({
     to: toEmail,
-    subject: 'Xác nhận địa chỉ email.',
+    subject: 'Xác nhận địa chỉ email',
     html,
   });
 };
 
-export { sendVerificationEmail };
+const sendTempPassEmail = async (
+  toEmail: string,
+  { password, username }: { password: string; username: string }
+) => {
+  const template = await getTemplate(TEMPLATE.NAME.PASSWORD);
+  if (!template) {
+    throw new Error('Email verification template not found');
+  }
+
+  const html = replaceTemplatePlaceholders(template.tem_html!, {
+    clientUrl: serverConfig.clientUrl,
+    password,
+    username,
+  });
+
+  return await sendMail({
+    to: toEmail,
+    subject: 'Mật khẩu tạm thời',
+    html,
+  });
+};
+
+export { sendMail, sendVerificationEmail, sendTempPassEmail };

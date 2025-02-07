@@ -1,12 +1,10 @@
 import {
-  json,
   Links,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
   useLoaderData,
-  useRouteError,
 } from '@remix-run/react';
 import type { LinksFunction, MetaFunction } from '@remix-run/node';
 
@@ -15,10 +13,9 @@ import style from './styles/index.scss?url';
 import HandsomeError from './components/HandsomeError';
 import { Bounce, ToastContainer } from 'react-toastify';
 import { getAppSettings } from './services/app.server';
-import { v2 as cloudinary } from 'cloudinary';
-import { getPublicId } from './utils';
 import Hydrated from './components/Hydrated';
 import BackToTop from './widgets/BackToTop';
+import { getImageUrl } from './utils';
 
 export const links: LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -40,10 +37,10 @@ export const meta: MetaFunction = () => {
 
   return [
     {
-      description: appSettings.app_meta.description,
+      description: appSettings.app_description,
     },
     {
-      title: appSettings.app_meta.title,
+      title: appSettings.app_title,
     },
   ];
 };
@@ -51,17 +48,14 @@ export const meta: MetaFunction = () => {
 export const loader = async () => {
   const appSettings = await getAppSettings();
 
-  return json({
-    appSettings: {
-      ...appSettings,
-      app_logo: cloudinary.url(getPublicId(appSettings.app_logo), {
-        transformation: { height: 28 },
-      }),
-    },
-  });
+  return {
+    appSettings,
+  };
 };
 
 export default function App() {
+  const { appSettings } = useLoaderData<typeof loader>();
+
   return (
     <html lang='en'>
       <head>
@@ -69,8 +63,21 @@ export default function App() {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <Meta />
         <Links />
+        <link rel='icon' href={getImageUrl(appSettings.app_favicon)} />
+
+        {appSettings.app_bodyScripts && (
+          <div
+            dangerouslySetInnerHTML={{ __html: appSettings.app_bodyScripts }}
+          ></div>
+        )}
       </head>
       <body className='app'>
+        {appSettings.app_bodyScripts && (
+          <div
+            dangerouslySetInnerHTML={{ __html: appSettings.app_bodyScripts }}
+          ></div>
+        )}
+
         <Outlet />
 
         <Hydrated>{() => <BackToTop />}</Hydrated>

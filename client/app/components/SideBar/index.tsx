@@ -1,8 +1,8 @@
 import { Link } from '@remix-run/react';
 import { RiStarFill } from '@remixicon/react';
-import { IPost } from '~/interfaces/post.interface';
+import { IPage } from '~/interfaces/page.interface';
 
-export default function SideBar({ posts }: { posts: Array<IPost> }) {
+export default function SideBar({ posts }: { posts: Array<IPage> }) {
   return (
     <aside className='col-span-3 max-md:hidden'>
       <div className=' mb-4'>

@@ -1,4 +1,4 @@
-import { IPost } from '~/interfaces/post.interface';
+import { IPage } from '~/interfaces/page.interface';
 import VerticalArtical from '../Post/Vertical';
 // import BoxHeader from '../BoxHeading';
 import { useEffect, useState } from 'react';
@@ -8,9 +8,9 @@ export default function PostBox({
 }: // category,
 {
   // category: ICategoryDetail | ICategory;
-  postsGetter: () => Promise<Array<IPost>>;
+  postsGetter: () => Promise<Array<IPage>>;
 }) {
-  const [posts, setPosts] = useState<Array<IPost>>([]);
+  const [posts, setPosts] = useState<Array<IPage>>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -31,13 +31,13 @@ export default function PostBox({
           !!posts.length && (
             <>
               <div className='col-span-full md:col-span-6'>
-                <VerticalArtical post={posts[0]} detailed important />
+                <VerticalArtical page={posts[0]} detailed important />
               </div>
 
               <div className='scroll grid grid-cols-2 md:grid-cols-6 col-span-full md:col-span-6 gap-4 md:gap-6 max-md:mt-4 max-md:px-2'>
                 {posts.slice(1, 5).map((post, index) => (
                   <div className='col-span-1 md:col-span-3' key={index}>
-                    <VerticalArtical post={post} />
+                    <VerticalArtical page={post} />
                   </div>
                 ))}
               </div>

@@ -69,7 +69,7 @@ export default function QuillEditor({
       if (file) {
         try {
           const range = quill.getSelection();
-          const placeholderUrl = '/loading.gif'; // Replace with your placeholder image URL
+          const placeholderUrl = '/assetes/loading.gif'; // Replace with your placeholder image URL
 
           // Save the placeholder position to replace it later
           const placeholderIndex = range?.index || 0;
@@ -81,7 +81,7 @@ export default function QuillEditor({
           formData.append('img', file);
           formData.append('folder', 'blog');
 
-          const res = await fetch('/images/upload', {
+          const res = await fetch('/api/images/upload', {
             method: 'POST',
             body: formData,
           });
@@ -90,7 +90,7 @@ export default function QuillEditor({
           quill.deleteText(placeholderIndex, 1); // Remove placeholder
 
           const altText = prompt('Enter alt text for the image:');
-          const img = `<p><img src="${data.imageUrl}" alt="${
+          const img = `<p><img src="${data.file.url}" alt="${
             altText || ''
           }" />${altText || ''}</p>`;
 

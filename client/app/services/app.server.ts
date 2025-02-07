@@ -1,4 +1,4 @@
-import { IAppSettings, IAppSettingsAttrs } from '~/interfaces/app.interface';
+import { IAppSettings } from '~/interfaces/app.interface';
 import { fetcher } from '.';
 
 const getAppSettings = async () => {
@@ -7,10 +7,7 @@ const getAppSettings = async () => {
   return res as IAppSettings;
 };
 
-const updateAppSettings = async (
-  data: Partial<IAppSettingsAttrs>,
-  request: any
-) => {
+const updateAppSettings = async (data: any, request: any) => {
   const res = await fetcher(`/app/settings`, {
     method: 'PUT',
     body: JSON.stringify(data),

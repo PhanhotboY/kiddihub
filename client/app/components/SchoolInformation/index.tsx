@@ -1,6 +1,6 @@
 import { ISchoolDetail } from '~/interfaces/school.interface';
 import style from './index.module.css';
-import { toAddressString, toAgeString, toTuitionString } from '~/utils';
+import { toAgeString, toCurrencyString, toTuitionString } from '~/utils';
 import {
   RiFacebookCircleFill,
   RiGlobalLine,
@@ -11,6 +11,7 @@ import {
 } from '@remixicon/react';
 import { Link } from '@remix-run/react';
 import { SCHOOL } from '~/constants/school.constant';
+import { toAddressString } from '~/utils/address.util';
 
 export default function SchoolContent({
   school,
@@ -74,7 +75,7 @@ export default function SchoolContent({
 
           <p className={style.key}>Học phí</p>
           <p className={`${style.value} text-[--sub1-color]`}>
-            Từ {toTuitionString(school.sch_tuition)} / tháng
+            Từ {toCurrencyString(school.sch_tuition.from)} / tháng
           </p>
 
           <p className={style.key}>Loại hình đào tạo</p>

@@ -5,26 +5,19 @@ import { APP } from '../constants';
 
 const appSchema = new Schema<IApp, IAppModel>(
   {
-    app_meta: {
-      title: { type: String, required: true },
-      description: { type: String, required: true },
-      keywords: { type: String, required: true },
-    },
+    app_title: { type: String, required: true },
+    app_description: { type: String, required: true },
     app_logo: { type: String, required: true },
-    app_contact: {
-      email: { type: String, required: true },
-      phone: { type: String, required: true },
-      address: { type: String, required: true },
-    },
+    app_favicon: { type: String, required: true },
     app_social: {
-      facebook: { type: String, required: true },
-      instagram: { type: String, required: true },
-    },
-    app_google: {
-      analytics: { type: String, required: true },
-      reCaptcha: { type: String, required: true },
+      facebook: { type: String },
+      youtube: { type: String },
+      tiktok: { type: String },
+      zalo: { type: String },
     },
     app_taxCode: { type: String, required: true },
+    app_headScripts: { type: String },
+    app_bodyScripts: { type: String },
   },
   {
     timestamps: true,

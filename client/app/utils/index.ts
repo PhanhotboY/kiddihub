@@ -1,28 +1,3 @@
-import pkg from 'vn-provinces';
-
-interface IProvince {
-  code: string;
-  name: string;
-  slug: string;
-  unit: string;
-}
-interface IDistrict {
-  code: string;
-  name: string;
-  slug: string;
-  unit: string;
-  provinceCode: string;
-  provinceName: string;
-  fullName: string;
-}
-
-const { getProvinces, getDistrictsByProvinceCode } = pkg;
-const provinces = getProvinces() as Array<IProvince>;
-
-const getPublicId = (url?: string) => {
-  return url?.split('/upload/')[1] || '';
-};
-
 const ageUnit = {
   d: 'ngày',
   m: 'tháng',
@@ -47,38 +22,53 @@ const toAgeString = ({ from, to }: { from: string; to: string }) => {
   return `${fromAge} ${getUnit(fromAgeUnit)} - ${toAge} ${getUnit(toAgeUnit)}`;
 };
 
-const abbCurrency = ['đồng', 'nghìn', 'triệu', 'tỷ'];
+const toTuitionString = ({
+  from,
+  to,
+}: {
+  from: string | number;
+  to: string | number;
+}) => {
+  return `${toCurrencyString(from)} - ${toCurrencyString(to)}`;
+};
+
+const abbCurrency = ['Đ', 'K', 'Tr', 'T'];
 const shortenNumber = (money: number, stack = 0) => {
-  if (Math.abs(+money) < 1_000 || stack >= abbCurrency.length - 1)
-    return `${+money.toFixed(2)} ${abbCurrency[stack]}`;
+  if (Math.abs(+money) < 1_000 || stack >= abbCurrency.length - 1) {
+    if (stack < 2) return `${+money.toFixed(2)}${abbCurrency[stack]}`;
+
+    const [int, dec] = money.toFixed(2).split('.');
+    return `${int}${abbCurrency[stack]}${dec.replace(/0+$/, '')}`;
+  }
 
   return shortenNumber(+(+money / 1_000).toFixed(2), ++stack);
 };
 
-const toTuitionString = ({ from, to }: { from: number; to: number }) => {
-  if (from === to) {
-    return shortenNumber(from);
-  }
-
-  return `${shortenNumber(from)} - ${shortenNumber(to)}`;
+const toCurrencyString = (money: number | string) => {
+  return shortenNumber(+money);
 };
 
-const toAddressString = ({
-  street,
-  province,
-  district,
-}: {
-  street: string;
-  province: string;
-  district: string;
-}) => {
-  const p = provinces.find((p) => p.slug === province);
-  const districts = getDistrictsByProvinceCode(
-    p?.code || ''
-  ) as Array<IDistrict>;
-  return `${street}, ${
-    districts?.find((d) => d.slug === district)?.name || ''
-  }, ${p?.name || ''}`;
+const getMapLink = (html: string) => {
+  return html.match(/<iframe.*src="([^"]*)".*><\/iframe>/)?.[1];
 };
 
-export { getPublicId, toAgeString, toTuitionString, toAddressString };
+const getImageUrl = (name: string) => {
+  return `http://localhost:8080/uploads/${name}`;
+};
+
+const toVnDateString = (date: string) => {
+  return new Date(date).toLocaleDateString('vi-VN', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+};
+
+export {
+  toAgeString,
+  toCurrencyString,
+  toTuitionString,
+  getMapLink,
+  getImageUrl,
+  toVnDateString,
+};

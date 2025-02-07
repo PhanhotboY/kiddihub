@@ -21,12 +21,15 @@ router.use(checkApiKey);
 //check api key's permission
 router.use(checkPermission('0000'));
 
+router.use('/categories', require('./category'));
 router.use('/profiles', require('./profile'));
+router.use('/branches', require('./branch'));
 router.use('/schools', require('./school'));
 router.use('/reviews', require('./review'));
+router.use('/images', require('./image'));
 router.use('/email', require('./email'));
 router.use('/users', require('./user'));
-router.use('/posts', require('./post'));
+router.use('/pages', require('./page'));
 router.use('/rbac', require('./rbac'));
 router.use('/auth', require('./auth'));
 router.use('/app', require('./app'));

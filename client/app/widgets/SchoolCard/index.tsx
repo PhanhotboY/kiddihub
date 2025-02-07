@@ -1,7 +1,8 @@
 import { Link } from '@remix-run/react';
 import { SCHOOL } from '~/constants/school.constant';
 import { ISchool } from '~/interfaces/school.interface';
-import { toAddressString, toAgeString, toTuitionString } from '~/utils';
+import { toAgeString, toTuitionString } from '~/utils';
+import { toAddressString } from '~/utils/address.util';
 
 export default function SchoolCard({
   school,

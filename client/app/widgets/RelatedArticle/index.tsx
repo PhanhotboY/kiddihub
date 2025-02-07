@@ -11,7 +11,7 @@ export default function RelatedArticle({ posts }: { posts: any[] }) {
         {posts.slice(0, 5).map((p, index) => (
           <li key={index}>
             <HorizontalPost
-              post={p}
+              page={p}
               ratio='5/7'
               colSpan={12}
               className='grid'

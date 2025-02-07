@@ -1,6 +1,6 @@
-import { Skeleton } from '@mui/material';
 import { Await } from '@remix-run/react';
 import { Suspense, ReactNode } from 'react';
+import LoadingOverlay from './LoadingOverlay';
 
 export default function Defer<T>({
   children,
@@ -10,7 +10,7 @@ export default function Defer<T>({
   resolve: Promise<T>;
 }) {
   return (
-    <Suspense fallback={<Skeleton />}>
+    <Suspense fallback={<LoadingOverlay />}>
       <Await resolve={resolve}>{(data) => children(data)}</Await>
     </Suspense>
   );

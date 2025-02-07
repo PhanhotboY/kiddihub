@@ -20,10 +20,11 @@ const mongodbConfigEnv: Record<'development' | 'production', MongodbConfig> = {
     dbHost: env.PRO_DB_HOST as string,
     dbPort: env.PRO_DB_PORT as string,
     dbName: env.PRO_DB_NAME as string,
-    dbUser: env.DEV_DB_USER as string,
-    dbPwd: env.DEV_DB_PWD as string,
+    dbUser: env.PRO_DB_USER as string,
+    dbPwd: env.PRO_DB_PWD as string,
   },
 };
 
 export const mongodbConfig: MongodbConfig =
-  mongodbConfigEnv[env.NODE_ENV as 'development' | 'production'] || mongodbConfigEnv.development;
+  mongodbConfigEnv[env.NODE_ENV as 'development' | 'production'] ||
+  mongodbConfigEnv.development;

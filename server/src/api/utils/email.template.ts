@@ -1,4 +1,4 @@
-const emailVerificationTemplate = () => {
+export const emailVerificationEmailTemplate = () => {
   return `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html
   dir="ltr"
@@ -389,6 +389,7 @@ const emailVerificationTemplate = () => {
                                           text-decoration: none;
                                           -ms-interpolation-mode: bicubic;
                                           border-radius: 100px;
+                                          margin: auto;
                                         "
                                         width="100"
                                         title="Confirm email"
@@ -659,7 +660,7 @@ const emailVerificationTemplate = () => {
                                         font-size: 18px;
                                       "
                                     >
-                                      Trân trọng,<br /><br />Phan
+                                      Trân trọng,<br />Phan
                                     </p>
                                   </td>
                                 </tr>
@@ -1074,7 +1075,7 @@ const emailVerificationTemplate = () => {
                                     >
                                       <a
                                         target="_blank"
-                                        href=""
+                                        href="https://www.iconictalents.vn"
                                         style="
                                           -webkit-text-size-adjust: none;
                                           -ms-text-size-adjust: none;
@@ -1083,19 +1084,7 @@ const emailVerificationTemplate = () => {
                                           color: #2d3142;
                                           font-size: 14px;
                                         "
-                                      ></a
-                                      >Copyright © 2023&nbsp;Company<a
-                                        target="_blank"
-                                        href=""
-                                        style="
-                                          -webkit-text-size-adjust: none;
-                                          -ms-text-size-adjust: none;
-                                          mso-line-height-rule: exactly;
-                                          text-decoration: underline;
-                                          color: #2d3142;
-                                          font-size: 14px;
-                                        "
-                                      ></a>
+                                      >Copyright © 2025&nbsp;Iconic Talents</a>
                                     </p>
                                   </td>
                                 </tr>
@@ -1114,8 +1103,5 @@ const emailVerificationTemplate = () => {
       </table>
     </div>
   </body>
-</html>
-`;
+</html>`;
 };
-
-export { emailVerificationTemplate };

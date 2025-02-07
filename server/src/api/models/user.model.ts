@@ -1,11 +1,18 @@
 import { model, Schema } from 'mongoose';
 
-import { ROLE, USER } from '../constants';
+import { USER } from '../constants';
 import { IUserAttrs, IUser, IUserModel } from '../interfaces/user.interface';
 import { formatAttributeName } from '../utils';
 
 const userSchema = new Schema<IUser, IUserModel>(
   {
+    usr_username: {
+      type: String,
+      unique: true,
+      required: true,
+      trim: true,
+      maxLength: 150,
+    },
     usr_email: {
       type: String,
       unique: true,
@@ -29,7 +36,6 @@ const userSchema = new Schema<IUser, IUserModel>(
     usr_avatar: { type: String, default: '' },
     usr_birthdate: { type: Date, default: null },
     usr_msisdn: { type: String, default: '' },
-    usr_role: { type: Schema.Types.ObjectId, ref: ROLE.DOCUMENT_NAME },
     usr_sex: { type: String, default: '' },
     usr_status: {
       type: String,

@@ -21,7 +21,7 @@ declare global {
 async function authenticationV2(
   req: Request,
   res: Response,
-  next: NextFunction
+  next?: NextFunction
 ) {
   const clientId = req.headers[HEADER.CLIENT_ID] as string;
   const accessToken = req.headers[HEADER.AUTHORIZATION] as string;
@@ -49,7 +49,7 @@ async function authenticationV2(
 
   req.keyToken = keyToken;
 
-  return next();
+  if (next) return next();
 }
 
 async function authentication(req: Request, res: Response, next: NextFunction) {

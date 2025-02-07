@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 import HorizontalPost from '../Post/Horizontal';
 import SeemoreButton from '../SeemoreButton';
-import { CircularProgress } from '@mui/material';
-import { IPost } from '~/interfaces/post.interface';
+import { IPage } from '~/interfaces/page.interface';
 import VerticalPost from '../Post/Vertical';
+import LoadingOverlay from '../LoadingOverlay';
 
 export default function PostList({
   posts,
   postsGetter,
   emphasized = false,
 }: {
-  posts: Array<IPost>;
-  postsGetter: (page: number) => Promise<Array<IPost>> | Array<IPost>;
+  posts: Array<IPage>;
+  postsGetter: (page: number) => Promise<Array<IPage>> | Array<IPage>;
   emphasized?: boolean;
 }) {
   const [page, setPage] = useState(1);
@@ -56,7 +56,7 @@ export default function PostList({
         {emphasized && (
           <li>
             <VerticalPost
-              post={loadedPosts[0]}
+              page={loadedPosts[0]}
               detailed
               important
               className='mb-4'
@@ -67,17 +67,13 @@ export default function PostList({
         {(emphasized ? loadedPosts.slice(1) : loadedPosts).map(
           (a: any, i: number) => (
             <li key={i}>
-              <HorizontalPost post={a} {...articleProps} />
+              <HorizontalPost page={a} {...articleProps} />
             </li>
           )
         )}
       </ul>
 
-      {loading && (
-        <div className='w-fit m-auto mt-6'>
-          <CircularProgress color='inherit' />
-        </div>
-      )}
+      {loading && <LoadingOverlay />}
 
       {hasMore && <SeemoreButton className='mt-6' loadData={loadPosts} />}
     </section>

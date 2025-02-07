@@ -2,7 +2,8 @@ import { HydratedDocument, Model, Types } from 'mongoose';
 import { USER } from '../constants';
 
 export interface IRawUser {
-  usr_role: Types.ObjectId | string;
+  usr_id: Types.ObjectId;
+  usr_username: string;
   usr_slug: string;
   usr_firstName: string;
   usr_lastName: string;
@@ -21,7 +22,7 @@ export interface IUser extends HydratedDocument<IRawUser> {}
 
 export interface IUserAttrs {
   id?: string;
-  role?: string;
+  username: string;
   slug: string;
   firstName: string;
   lastName: string;
@@ -47,6 +48,7 @@ export interface IUserJWTPayload {
 
 export interface IUserResponseData {
   id: string;
+  username: string;
   slug: string;
   firstName: string;
   lastName: string;
