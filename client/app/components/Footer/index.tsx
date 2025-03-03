@@ -11,12 +11,7 @@ import { useRootLoaderData } from '~/lib/useRootLoaderData';
 
 export default function Footer() {
   const {
-    appSettings: {
-      app_social: social,
-      app_meta: meta,
-      app_contact: contact,
-      ...app
-    },
+    appSettings: { app_social: social, app_title, ...app },
   } = useRootLoaderData();
 
   return (
@@ -30,10 +25,10 @@ export default function Footer() {
             <img
               className='object-scale-down scale-150 w-fit h-fit z-0'
               src={app.app_logo}
-              alt={meta.title}
+              alt={app_title}
             />
             <p className='md:text-center text-[--sub1-text-color] mt-2'>
-              {meta.title}
+              {app_title}
             </p>
           </div>
 
@@ -126,32 +121,32 @@ export default function Footer() {
 
         <section>
           <div className='col-span-12 md:col-span-9'>
-            <p>Copyright © 2020 {meta.title}</p>
+            <p>Copyright © 2020 {app_title}</p>
             <p>
               Công ty cổ phần công nghệ giáo dục KiddiHub - Mã số thuế:{' '}
               <strong>{app.app_taxCode}</strong> cấp ngày: 10/06/2020 tại Sở Kế
               hoạch và Đầu tư thành phố Hà Nội - Đại diện: Ông VŨ VĂN TÙNG
             </p>
-            <p>Địa chỉ: {contact.address}</p>
+            {/* <p>Địa chỉ: {contact.address}</p> */}
             <p>
               Email:{' '}
               <a
                 className='hover:text-[--main-color]'
-                href={`mailto:${contact.email}`}
+                // href={`mailto:${contact.email}`}
                 target='_blank'
                 rel='noreferrer'
               >
-                {contact.email}
+                {/* {contact.email} */}
               </a>
             </p>
             <p>
               Hotline:{' '}
-              <a
+              {/* <a
                 className='hover:text-[--main-color]'
                 href={`tel:${contact.phone}`}
               >
                 {contact.phone}
-              </a>
+              </a> */}
             </p>
           </div>
 
@@ -176,13 +171,6 @@ export default function Footer() {
                   <RiFacebookBoxFill />
                 </Link>
               </li>
-              {
-                <li className='hover:text-[--main-color]'>
-                  <Link to={social.instagram}>
-                    <RiInstagramFill />
-                  </Link>
-                </li>
-              }
               {/* @ts-ignore */}
               {social.youtube && (
                 <li className='hover:text-[--main-color]'>

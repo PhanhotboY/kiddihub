@@ -63,7 +63,7 @@ export default function Index() {
         <h2 className='title'>Tin mới</h2>
 
         <Post
-          page={{
+          post={{
             thumbnail: '/news.png',
             title:
               'KiddiHub giới thiệu tài liệu "Ranking Top 100 Trường Hot Nhất Tháng 10" – thông tin đáng giá về xu hướng và chất lượng giáo dục mầm non',

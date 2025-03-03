@@ -26,17 +26,17 @@ const getAppSettings = async () => {
   const app = await AppModel.findOne({});
   if (!app) {
     const app = await AppModel.build({
-      title: '',
-      description: '',
-      logo: '',
-      favicon: '',
+      title: 'title',
+      description: 'description',
+      logo: 'logo',
+      favicon: 'favicon',
       social: {
         facebook: '',
         zalo: '',
         youtube: '',
         tiktok: '',
       },
-      taxCode: '',
+      taxCode: 'taxCode',
       headScripts: '',
       bodyScripts: '',
     });
