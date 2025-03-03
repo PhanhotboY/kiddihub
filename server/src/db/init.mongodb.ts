@@ -23,8 +23,13 @@ class MongoDB {
 
     console.log('Retrying to connect to MongoDB...', this.retryCount);
     this.retryCount++;
+
+    const connectionStr = {
+      production: `mongodb+srv://${dbUser}:${dbPwd}@${dbHost}?retryWrites=true&w=majority&appName=Cluster0`,
+      development: `mongodb+srv://${dbUser}:${dbPwd}@${dbHost}?retryWrites=true&w=majority&appName=Cluster0`,
+    }[process.env.NODE_ENV as 'development' | 'production'];
     await mongoose
-      .connect(`mongodb://${dbUser}:${dbPwd}@${dbHost}:${dbPort}`, {
+      .connect(connectionStr, {
         connectTimeoutMS: 1000,
         serverSelectionTimeoutMS: 2000,
         dbName,
