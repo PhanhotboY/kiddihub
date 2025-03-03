@@ -2,6 +2,7 @@ import { Link, NavLink, useLoaderData } from '@remix-run/react';
 import { RiCloseLine, RiMenuLine } from '@remixicon/react';
 import { useState } from 'react';
 import { useRootLoaderData } from '~/lib/useRootLoaderData';
+import { getImageUrl } from '~/utils';
 
 export default function Header({ shadow }: { shadow?: boolean }) {
   const { appSettings } = useRootLoaderData();
@@ -19,8 +20,8 @@ export default function Header({ shadow }: { shadow?: boolean }) {
           <Link className='px-2 py-4' to='/'>
             <img
               className='h-10 object-contain'
-              src={appSettings.app_logo}
-              alt={appSettings.app_meta.title}
+              src={getImageUrl(appSettings.app_logo)}
+              alt={appSettings.app_title}
             />
           </Link>
 
