@@ -17,22 +17,24 @@ export default function SchoolCard({
 }) {
   return (
     <article className='relative lg:static grid grid-cols-9 gap-x-4 rounded-lg bg-white border border-zinc-200 shadow overflow-hidden'>
-      <div className='col-span-12 lg:col-span-2'>
-        <Link
-          className='block max-lg:aspect-video h-full overflow-hidden w-full'
-          to={
-            admin
-              ? `/cmsdesk/schools/${school.id}/edit`
-              : `/truong/${school.sch_slug}`
-          }
-        >
-          <img
-            className='object-cover object-center h-full w-full'
-            src={school.sch_avatar}
-            alt={school.sch_name}
-          />
-        </Link>
-      </div>
+      {admin || (
+        <div className='col-span-12 lg:col-span-2'>
+          <Link
+            className='block max-lg:aspect-video h-full overflow-hidden w-full'
+            to={
+              admin
+                ? `/cmsdesk/schools/${school.id}/edit`
+                : `/truong/${school.sch_slug}`
+            }
+          >
+            <img
+              className='object-cover object-center h-full w-full'
+              src={school.sch_avatar}
+              alt={school.sch_name}
+            />
+          </Link>
+        </div>
+      )}
 
       <div className='detail col-span-12 lg:col-span-7 flex flex-col px-4 lg:px-0 pt-4 gap-2'>
         <Link
